@@ -1,5 +1,5 @@
 const h=require("http");
-let x=10
+let x=20
 server=h.createServer((req,resp)=>{
 resp.setHeader("Content-Type","text/html");
 resp.write("<h1>Sandip das</h1>");
@@ -17,6 +17,8 @@ resp.write(`
     </body>
     </html>
     `);
-resp.end()
+resp.end();
+process.exit();
+
 });
 server.listen(2000)
