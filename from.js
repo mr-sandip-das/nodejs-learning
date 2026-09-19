@@ -24,6 +24,20 @@ http.createServer((req, resp) => {
                 let readdata=qS.parse(rawData)
                 console.log(readdata.n);
                 console.log(readdata.n1);
+                let mainData="My name is "+readdata.n+ "and my email id is : "+readdata.n1;
+                // Sync waye
+                // fs.writeFileSync("text/"+readdata.n+".txt",mainData);
+                // console.log("file creted");
+                // asyn way
+                fs.writeFile("text/"+readdata.n+".txt",mainData,"utf-8",(err,data)=>{
+                    if(err){
+                        console.log("Server error");
+                     }
+                     else{
+                    console.log("file creted");
+                     }
+                })
+
             });
             
             resp.write("<h1>Form Submited</h1>")
