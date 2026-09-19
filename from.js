@@ -1,5 +1,7 @@
 const http = require("http");
 const fs = require("fs");
+const qS=require("querystring");
+const { log } = require("console");
 http.createServer((req, resp) => {
     fs.readFile("html/from.html", "utf-8", (err, data) => {
         if (err) {
@@ -13,6 +15,17 @@ http.createServer((req, resp) => {
             resp.end();
         }
         else if (req.url == "/submit") {
+            let dataBody=[];
+            req.on("data",(chunk)=>{
+               dataBody.push(chunk)
+            });
+            req.on('end',()=>{
+                let rawData=Buffer.concat(dataBody).toString();
+                let readdata=qS.parse(rawData)
+                console.log(readdata.n);
+                console.log(readdata.n1);
+            });
+            
             resp.write("<h1>Form Submited</h1>")
             resp.end();
         }
